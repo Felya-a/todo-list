@@ -1,0 +1,122 @@
+.login {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(75, 75, 75, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  transition: all ease 0.3s;
+  cursor: pointer;
+  pointer-events: none;
+  opacity: 0;
+  // transform: scale(0);
+  &.active {
+    transition: all ease 0.5s;
+    pointer-events: all;
+    opacity: 1;
+  }
+  &__content {
+    cursor: default;
+    background-color: #fff;
+    justify-items: center;
+    border-radius: 15px;
+    // height: 600px;
+    width: 50vw;
+    padding: 30px;
+    position: relative;
+    transform: scale(0.5);
+    transition: all 0.5s;
+    &.active {
+      transform: scale(1);
+    }
+    &-title {
+      text-align: center;
+      font-size: 18px;
+    }
+    &-text {
+      margin-top: 20px;
+    }
+    &-exit {
+      position: absolute;
+      top: 2vh;
+      right: 2vw;
+      cursor: pointer;
+      img {
+        height: 50px;
+        width: 50px;
+      }
+    }
+  }
+}
+
+// .loginform {
+//   display: grid;
+//   align-items: center;
+//   justify-items: center;
+//   grid-template-columns: 30% 1fr;
+//   grid-template-areas:
+//     "email email"
+//     "password password"
+//     "rememberme remembermeText"
+//     "error error"
+//     "login login";
+//   input {
+//     margin: 10px;
+//     padding: 5px 10px;
+//   }
+//   &__input_email {
+//     grid-area: email;
+//   }
+//   &__input_password {
+//     grid-area: password;
+//   }
+//   &__checkbox_rememberme {
+//     grid-area: rememberme;
+//     input {
+//       height: 15px;
+//       width: 15px;
+//     }
+//   }
+//   &__input_text {
+//     grid-area: remembermeText;
+//     user-select: none;
+//     padding: 0 0 3px 0;
+//   }
+//   &__btnlogin {
+//     grid-area: login;
+//   }
+//   .error {
+//     display: grid;
+//     grid-area: error;
+//     grid-template-areas:
+//       "captcha"
+//       "message";
+//     &__message {
+//       grid-area: message;
+//       outline: solid 1px red;
+//       color: red;
+//       padding: 5px 10px;
+//       margin: 15px 0;
+//     }
+//     &__captcha {
+//       margin: 10px 0 0 0;
+//       display: grid;
+//       grid-area: captcha;
+//       grid-template-areas:
+//         "img"
+//         "input";
+//       &_img {
+//         grid-area: img;
+//         justify-self: center;
+//         display: block;
+//         width: 150px;
+//       }
+//       &_input {
+//         grid-area: input;
+//       }
+//     }
+//   }
+// }

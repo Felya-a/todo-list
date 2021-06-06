@@ -1,0 +1,11 @@
+.footer {
+  grid-area: footer;
+  display: grid;
+  align-items: center;
+  height: 10vh;
+  width: 100vw;
+  color: black;
+  text-align: center;
+  border-top: solid 1px rgb(153, 153, 153);
+  box-shadow: 0 -1px 1px rgb(214, 214, 214);
+}
