@@ -8,6 +8,9 @@ body {
   min-height: 100vh;
   #root{
     min-height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
   }
 }
 

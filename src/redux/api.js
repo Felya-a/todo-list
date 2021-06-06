@@ -8,3 +8,24 @@ const instance = axios.create({
   }
 });
 
+export const Initialize = {
+  authMe() {
+    return instance.get('auth/me')
+  },
+  logining(formData) {
+    console.log("api");
+    return instance.post("auth/login", formData)
+  },
+  logout() {
+    return instance.delete("auth/login")
+  },
+}
+
+export const TodoAPI = {
+  createList(title) {
+    return instance.post("todo-lists", { title })
+  },
+  getLists() {
+    return instance.get("todo-lists")
+  }
+}

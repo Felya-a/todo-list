@@ -9,6 +9,9 @@
   'footer footer footer';
   grid-template-rows: auto auto minmax(0px,1fr) auto;
 }
+.Preloader{
+  width: 100px;
+}
 // .modalbtn{
 //   font-size: 20px;
 //   border-radius: 10px;
@@ -16,3 +19,16 @@
 //   padding: 5px 10px;
 //   cursor: pointer;
 // }
+.btn {
+  cursor: pointer;
+  border: 1px solid grey;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  color: black;
+  &:hover {
+    color: white;
+    background-color: rgb(129, 129, 129);
+  }
+}

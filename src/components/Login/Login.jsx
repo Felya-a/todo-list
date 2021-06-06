@@ -3,14 +3,13 @@ import * as cn from 'classnames'
 import { useEffect, useState } from 'react'
 import { Input } from '../common/FormsControls/FormsControls';
 import { useHistory } from 'react-router'
-import { compose } from 'redux'
-import { LoginHOC } from '../../hoc/LoginHOC'
-import { useMemo } from 'react'
 import { reduxForm, Field } from 'redux-form'
+import { connect } from 'react-redux';
+import { logoutTC, loginingTC } from '../../redux/authReducer'
 
 const LoginForm = (props) => {
   return (
-    <form onSubmit={props.handleSubmit} className='loginform'>
+    <form onSubmit={props.handleSubmit} className='form'>
       <div className="form__input_email input">
         <Field
           type="text"
@@ -39,45 +38,55 @@ const LoginForm = (props) => {
       <label htmlFor="rememberMe" className='form__input_text'>
         Remember me
       </label>
-      <button>Login</button>
+      <button className='form__btnlogin btn'>Login</button>
     </form>
   )
 }
 
 const LoginReduxFrom = reduxForm({ form: "login" })(LoginForm)
 
-const Login = () => {
-  console.log("RENDER LOGIN");
+const Login = (props) => {
+
   const [isActive, setActive] = useState(false)
   const history = useHistory();
+
   useEffect(() => {
-    console.log('useEffect');
-    setActive(true)
-    return function () {
-      console.log('useEffect1');
-      // setActive(false)
-    }
+    setTimeout(() => setActive(true), 0);
   }, [])
+
   const unmount = () => {
     setActive(false)
     setTimeout(() => {
       history.push("")
     }, 500)
   }
-  const onSubmit = (formData) => {
-    console.log(formData);
+
+  const logout = () => {
+    props.logoutTC();
   }
+
+  const onSubmit = (formData) => {
+    props.loginingTC(formData);
+  }
+
   return (
 
     <div className={cn("login", { "active": isActive })} onClick={() => unmount()}>
       <div className={cn("login__content", { "active": isActive })} onClick={e => e.stopPropagation()}>
-        <div className="login__content-title">Login</div>
+        <h3 className="login__content-title">Sing In</h3>
         <div className="login__content-exit" onClick={() => unmount()}><img src="images/arrow-exit.svg" alt="X" /></div>
-        {/* <LoginReduxFrom onSubmit={onSubmit} /> */}
+        {props.isAuth
+          ? <button onClick={logout} className='login__logout-btn btn'>Logout</button>
+          : <LoginReduxFrom onSubmit={onSubmit} />
+        }
       </div>
     </div>
   )
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+})
+
+export default connect(mapStateToProps, { loginingTC, logoutTC})(Login);
 // export default compose(LoginHOC)(Login);
