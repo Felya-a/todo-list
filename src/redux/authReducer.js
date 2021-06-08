@@ -13,11 +13,12 @@ export const logoutUser = () => ({ type: LOGOUT_USER });
 export const initializeAPPTC = () => async (dispatch) => {
   const response = await Initialize.authMe();
   if (response) dispatch(initializeAPP());
-}
-export const initializeUserTC = () => async (dispatch) => {
-  const response = await Initialize.authMe();
   if (!response.data.resultCode) dispatch(initializeUser(response.data.data));
 }
+// export const initializeUserTC = () => async (dispatch) => {
+//   const response = await Initialize.authMe();
+//   if (!response.data.resultCode) dispatch(initializeUser(response.data.data));
+// }
 export const logoutTC = () => async (dispatch) => {
   const response = await Initialize.logout();
   if (!response.data.resultCode) dispatch(logoutUser());
@@ -29,7 +30,7 @@ export const loginingTC = (formData) => async (dispatch) => {
     rememberMe: true,
   }
   const response = await Initialize.logining(_formData);
-  if (!response.data.resultCode) dispatch(initializeUserTC());
+  if (!response.data.resultCode) dispatch(initializeAPPTC());
 }
 
 const initialState = {
