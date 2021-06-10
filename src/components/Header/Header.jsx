@@ -10,18 +10,10 @@ const Header = (props) => {
       <div className="header__loginBlock" onClick={() => history.push("/login")}>
         <img src="images/user.svg" alt="User IMG" />
         < NavLink className="loginBlock__item" to={`/login`} >{props.login || "Sing in"}</NavLink>
-        {/* {props.isAuth ?
-          < NavLink className="loginBlock__item" to={`/login`} >{props.login.toUpperCase()}</NavLink> :
-          < NavLink className="loginBlock__item" to={`/login`}>Sing in</NavLink>
-        } */}
       </div>
     </div>
   )
 }
-
-{/* <button className='modalbtn' onClick={() => setModalActive(true)}>Модальное окно</button>
-<Modal modalActive={modalActive} setModalActive={() => setModalActive(false)} />
- */}
 
 const mapStateToProps = (state) => ({
   login: state.auth.login,

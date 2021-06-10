@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
-let mapStateToPropsForRedirect = (state) => ({
+let mapStateToProps = (state) => ({
 })
 
 // hoc это добавление компоненте дополнительных опций, за счет еще одного оборачивания в контейнерную компоненту
-export const LoginHOC = (Component) => {
+export const Modal = (Component) => {
   class RedirectComponent extends React.Component {
     state = {
       isActive: false
@@ -24,7 +24,7 @@ export const LoginHOC = (Component) => {
   }
 
 
-  let ConnectedAuthRedirectComponent = connect(mapStateToPropsForRedirect)(RedirectComponent)
+  let ConnectedAuthRedirectComponent = connect(mapStateToProps)(RedirectComponent)
 
   return ConnectedAuthRedirectComponent;
 }

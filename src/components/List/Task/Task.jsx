@@ -7,7 +7,7 @@ const Task = (props) => {
   return (
     <div className='task'>
       {editMode
-        ? <input type="text" placeholder="Enter the task..." />
+        ? <input className='input' type="text" placeholder="Enter the task..." />
         : <div>{props.title}</div>
       }
     </div>

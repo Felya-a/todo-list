@@ -9,7 +9,7 @@
   width: 100vw;
   height: 8vh;
   color: black;
-  border-bottom: solid 1px rgb(153, 153, 153);
+  border-bottom: solid 1px #99999942;
   box-shadow: 0 1px 1px rgb(214, 214, 214);
   background-color: #fff;
   top: 0;
@@ -18,8 +18,11 @@
   // }
   &__logo {
     grid-column: 2;
-    font-size: 38px;
+    font-size: 220%;
     font-family: 'Stint Ultra Condensed', cursive;
+    @media (max-width: 767px) {
+      font-size: 20px;
+    }
   }
   &__loginBlock {
     user-select: none;
@@ -30,6 +33,9 @@
       margin: -5px 15px;
     }
     .loginBlock__item {
+      @media (max-width: 767px) {
+        display: none;
+      }
       font-size: 15px;
       text-transform: uppercase;
       color: black;

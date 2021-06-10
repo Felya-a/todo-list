@@ -51,7 +51,7 @@ const Login = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    setTimeout(() => setActive(true), 0);
+    setTimeout(() => setActive(true), 50);
   }, [])
 
   const unmount = () => {
@@ -65,8 +65,9 @@ const Login = (props) => {
     props.logoutTC();
   }
 
-  const onSubmit = (formData) => {
-    props.loginingTC(formData);
+  const onSubmit = async (formData) => {
+    const promise = await props.loginingTC(formData);
+    if (promise) history.push("");
   }
 
   return (

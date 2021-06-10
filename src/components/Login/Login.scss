@@ -17,6 +17,7 @@
     padding: 15px 30px;
   }
   &.active {
+    z-index: 2;
     transition: all ease 0.5s;
     pointer-events: all;
     opacity: 1;

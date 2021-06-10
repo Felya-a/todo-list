@@ -1,25 +1,67 @@
 .list {
-  background-color: rgb(211, 211, 211);
+  background-color: rgb(224, 224, 224);
   margin: 30px 30px;
   display: grid;
   justify-items: center;
   &__title {
+    overflow: hidden;
+    position: relative;
     display: grid;
-    justify-items: center;
+    justify-items: start;
     align-items: center;
-    border: 1px solid grey;
-    width: 99%;
+    outline: 1px solid #80808070;
+    width: 100%;
     height: 50px;
-    &_input {
-      width: 100%;
-      height: 100%;
-      text-decoration: none;
+    &:hover {
+      .help-buttons {
+        transform: translateY(0);
+      }
     }
-    &_div {
-      display: grid;
-      height: 100%;
-      max-width: 100%;
-      justify-self: center;
+    &_input {
+      padding: 0 15px;
+    }
+    &_span {
+      font-size: 20px;
+      padding: 0 15px;
+      justify-content: start;
+      align-content: center;
+    }
+  }
+  .input {
+    outline: none;
+    border: none;
+    height: 100%;
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+      "Droid Sans", "Helvetica Neue", sans-serif;
+    font-size: 20px;
+    &:focus {
+    }
+  }  
+}
+.help-buttons {
+  user-select: none;
+  overflow: hidden;
+  transform: translateY(100%);
+  transition: all ease-in-out 0.35s;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  &__item {
+    cursor: pointer;
+    &.info img {
+      width: 30px;
+      position: absolute;
+      top: 20%;
+      right: 15%;
+    }
+    &.delete {
+      img {
+        top: 30%;
+        right: 4%;
+        position: absolute;
+        width: 20px;
+      }
     }
   }
 }

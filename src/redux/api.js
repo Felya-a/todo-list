@@ -27,5 +27,11 @@ export const TodoAPI = {
   },
   getLists() {
     return instance.get("todo-lists")
-  }
+  },
+  renameList(id, title) {
+    return instance.put(`todo-lists/${id}`, { title })
+  },
+  deleteList(id) {
+    return instance.delete(`todo-lists/${id}`)
+  },
 }

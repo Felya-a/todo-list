@@ -6,16 +6,15 @@ import { Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Login from './components/Login/Login';
-import { initializeAPPTC } from './redux/authReducer.js';
 import { connect } from 'react-redux';
 import Preloader from './components/Preloader/Preloader';
 import Main from './components/Main/Main';
-import { getListsTC } from './redux/todoListReducer.js';
+import { initializeAppTC } from './redux/initializeReducer';
+import AddList from './components/AddList/AddList';
 
 function App(props) {
   useEffect(() => {
-    props.initializeAPPTC();
-    props.getListsTC();
+    props.initializeAppTC();
   }, [])
   if (!props.initialized) return <Preloader />;
   return (
@@ -23,6 +22,7 @@ function App(props) {
       <div className="App">
         <Header />
         <Route path='/login' render={() => <Login />} />
+        <Route path='/add-list' render={() => <AddList />} />
         <Main />
         <Footer />
       </div>
@@ -31,7 +31,7 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => ({
-  initialized: state.auth.initialized,
+  initialized: state.init.initialized,
 })
 
-export default connect(mapStateToProps, { initializeAPPTC, getListsTC })(App);
+export default connect(mapStateToProps, { initializeAppTC })(App);
