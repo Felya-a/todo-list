@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
+.delwar{
+  display: grid;
+  grid-template-areas: 
+  'title title'
+  'text text'
+  'yes no'
+  ;
+  &__title{
+    grid-area: title;
+  }
+  &__text{
+    margin-top: 20px;
+    grid-area: text;
+  }
+  &__btn{
+    justify-self: center;
+    width: 50%;
+    line-height: 40px;
+    margin: 40px 0 0 0 ;
+    font-weight: 400;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+  }
+  .btn-yes{
+    grid-area: yes;
+    border: red 3px solid;
+    &:hover{
+      box-shadow: 0px 0px 10px 7px #ff000045;
+      background-color: red;
+    }
+  }
+  .btn-no{
+    grid-area: no;
+    &:hover{
+      border: green 1px solid;
+      box-shadow: 0px 0px 7px 3px green;
+      background-color: green;
+    }
+  }
+}

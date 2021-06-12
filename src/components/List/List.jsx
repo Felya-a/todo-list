@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { renameListTC, deleteListTC } from '../../redux/todoListReducer';
+import { NavLink, Redirect, useHistory } from 'react-router-dom';
+import { renameListTC } from '../../redux/todoListReducer';
+import DeleteWarning from './DeleteWarning/DeleteWarning';
 import './List.scss'
 import Task from './Task/Task';
+import DeleteIMG from '../../assets/images/delete.svg';
+import InfoIMG from '../../assets/images/info.svg';
 
 
-const List = ({ infoAboutList, tasks, renameListTC, deleteListTC }) => {
+
+const List = ({ infoAboutList, tasks, renameListTC }) => {
   const [editTitle, setEditTitle] = useState(false);
   const [title, setTitle] = useState(infoAboutList.title)
+  const history = useHistory();
   const chengeEditMode = () => {
     if (editTitle && title != infoAboutList.title) renameListTC(infoAboutList.id, title);
     setEditTitle(!editTitle)
@@ -22,7 +28,6 @@ const List = ({ infoAboutList, tasks, renameListTC, deleteListTC }) => {
     <div className='list'>
       <div className="list__title" onDoubleClick={chengeEditMode}>
         {editTitle
-          // {true
           ? <input
             className="list__title_input input"
             type="text"
@@ -34,8 +39,8 @@ const List = ({ infoAboutList, tasks, renameListTC, deleteListTC }) => {
           : <span className="list__title_span">{title}</span>
         }
         <div className="help-buttons">
-          <span className='help-buttons__item info'><img src="images/info.svg" alt="" /></span>
-          <span className='help-buttons__item delete' onClick={() => deleteListTC(infoAboutList.id)}><img src="images/delete.svg" alt="" /></span>
+          <span className='help-buttons__item info'><img src={InfoIMG} alt="" /></span>
+          <span className='help-buttons__item delete'><img onClick={() => history.push(`/delete-warning/${infoAboutList.id}`)} src={DeleteIMG} alt="" /></span> 
         </div>
       </div>
       {tasks.map((item, index) => <Task key={index} {...item} />)}
@@ -43,4 +48,4 @@ const List = ({ infoAboutList, tasks, renameListTC, deleteListTC }) => {
   )
 }
 
-export default connect(null, { renameListTC, deleteListTC })(List);
+export default connect(null, { renameListTC })(List);

@@ -13,7 +13,6 @@ export const Initialize = {
     return instance.get('auth/me')
   },
   logining(formData) {
-    console.log("api");
     return instance.post("auth/login", formData)
   },
   logout() {

@@ -6,6 +6,7 @@ import List from '../List/List';
 import Preloader from '../Preloader/Preloader';
 import { useHistory } from 'react-router';
 import { NavLink } from 'react-router-dom';
+import AddIMG from '../../assets/images/add.svg';
 
 
 const Main = (props) => {
@@ -27,7 +28,7 @@ const Main = (props) => {
       {/* <input type="text" onChange={changeInput} value={value} />
       <button onClick={submit}>Создать</button> */}
       {props.lists.map((item, index) => <List key={index} infoAboutList={item} tasks={tasks}/> )}
-      <div className="addList"><NavLink to="/add-list"><img src="images/add.svg" alt="" /></NavLink></div>
+      <div className="addList"><NavLink to="/add-list"><img src={AddIMG} alt="" /></NavLink></div>
     </div>
   )
 }

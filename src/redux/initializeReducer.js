@@ -9,7 +9,6 @@ export const setInitialize = () => ({ type: SET_INIT, });
 // Thunk Creator
 export const initializeAppTC = () => async (dispatch) => {
   const promise = await dispatch(initializeUserTC());
-  console.log(promise);
   if (promise) dispatch(getListsTC());
   dispatch(setInitialize());
 }

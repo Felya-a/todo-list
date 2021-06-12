@@ -11,6 +11,7 @@ import Preloader from './components/Preloader/Preloader';
 import Main from './components/Main/Main';
 import { initializeAppTC } from './redux/initializeReducer';
 import AddList from './components/AddList/AddList';
+import DeleteWarning from './components/List/DeleteWarning/DeleteWarning';
 
 function App(props) {
   useEffect(() => {
@@ -21,8 +22,9 @@ function App(props) {
     <BrowserRouter >
       <div className="App">
         <Header />
-        <Route path='/login' render={() => <Login />} />
+        <Route path='/login' render={() => <Login/>} />
         <Route path='/add-list' render={() => <AddList />} />
+        <Route path='/delete-warning/:id' render={() => <DeleteWarning />} />
         <Main />
         <Footer />
       </div>
