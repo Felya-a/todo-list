@@ -1,15 +1,73 @@
-import { useState } from 'react';
-import './Task.scss'
+import { useEffect, useState } from 'react';
+import './Task.scss';
+import cleanCircle from '../../../assets/images/dry-clean.svg';
+import check1IMG from '../../../assets/images/check1.svg';
+import check0IMG from '../../../assets/images/check0.svg';
+import DeleteIMG from '../../../assets/images/delete.svg';
+
 
 
 const Task = (props) => {
-  const [editMode, setEditMode] = useState(false)
+  const [editMode, setEditMode] = useState(false);
+  const [completed, setCompleted] = useState(false);
+  const [taskText, setTaskText] = useState();
+  const [loadingTime, setLoadingTime] = useState(false)
+  useEffect(() => {
+    if (props.title) setTaskText(props.title);
+  }, [props.title])
+
+  useEffect(() => {
+    setLoadingTime(false)
+    setCompleted(Boolean(props.status));
+  }, [props.status])
+
+  const deleteTask = () => {
+    props.deleteTaskTC(props.todoListId, props.id)
+  }
+
+  const chengeCompleted = async () => {
+    setLoadingTime(true)
+    props.chengeComplitedStatusTC(props.todoListId, props.id, !completed, taskText)
+  }
+
+  const chengeEditMode = () => {
+    // if (editMode && taskText != props.title) props.addTaskTC(props.idList, taskText)
+    if (editMode && taskText != props.title) props.chengeTaskTextTC(props.todoListId, props.id, taskText)
+    setEditMode(!editMode);
+  }
+
+  const chengeTaskText = (e) => {
+    setTaskText(e.target.value);
+  }
+  console.log("RENDER TASK");
   return (
     <div className='task'>
-      {editMode
-        ? <input className='input' type="text" placeholder="Enter the task..." />
-        : <div>{props.title}</div>
-      }
+      <div className="task__check-block">
+        {loadingTime
+          ? <img src={check0IMG} alt="" />
+          : completed
+            ? <img onClick={chengeCompleted} src={check1IMG} alt="" />
+            : <img onClick={chengeCompleted} src={cleanCircle} alt="" />
+        }
+      </div>
+      <div onDoubleClick={chengeEditMode} className="task__text">
+        {editMode
+          ? <input
+            className='task__text_input input'
+            type="text"
+            placeholder="Enter the task..."
+            value={taskText}
+            onChange={chengeTaskText}
+            onBlur={chengeEditMode}
+            autoFocus
+          />
+          : <span onClick={() => console.log(loadingTime, completed)} className="task__text_span">{props?.title || "нужно доделать TODO лист"}</span>
+        }
+        <div className="help-buttons">
+          {/* <span className='help-buttons__item info'><img src={InfoIMG} alt="" /></span> */}
+          <span className='help-buttons__item delete'><img onClick={deleteTask} src={DeleteIMG} alt="" /></span>
+        </div>
+      </div>
     </div>
   )
 }

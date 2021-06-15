@@ -1,8 +1,16 @@
 .list {
   background-color: rgb(224, 224, 224);
-  margin: 30px 30px;
   display: grid;
+  grid-template-rows: 50px 1fr;
+  position: relative;
   justify-items: center;
+  z-index: 2;
+  &:hover{
+    .add-task {
+      transform: translateY(100%);
+      opacity: 1;
+    }
+  }
   &__title {
     overflow: hidden;
     position: relative;
@@ -18,7 +26,9 @@
       }
     }
     &_input {
-      padding: 0 15px;
+      padding: 0 0 0 15px;
+      font-size: 20px;
+      display: inline-block;
     }
     &_span {
       font-size: 20px;
@@ -27,15 +37,18 @@
       align-content: center;
     }
   }
+  &__tasks{
+    width: 100%;
+  }
   .input {
     outline: none;
     border: none;
-    height: 100%;
+    box-sizing: border-box;
     width: 100%;
+    height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
       "Droid Sans", "Helvetica Neue", sans-serif;
     // font-family: "Roboto Condensed", sans-serif;
-    font-size: 20px;
   }
 }
 .help-buttons {
@@ -44,6 +57,8 @@
   transform: translateY(100%);
   transition: all ease-in-out 0.35s;
   position: absolute;
+  top: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   &__item {
@@ -62,5 +77,21 @@
         width: 20px;
       }
     }
+  }
+}
+.add-task {
+  display: grid;
+  justify-items: center;
+  position: absolute;
+  opacity: 0;
+  overflow: hidden;
+  z-index: 1;
+  bottom: 0;
+  width: 100%;
+  transition: all ease-in-out 0.35s 0.1s;
+  transform: translateY(50%);
+  padding: 10px 0;
+  img {
+    width: 25px;
   }
 }

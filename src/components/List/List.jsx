@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Redirect, useHistory } from 'react-router-dom';
-import { renameListTC } from '../../redux/todoListReducer';
+import { renameListTC, createNewTaskTC, chengeTaskTextTC, chengeComplitedStatusTC, deleteTaskTC } from '../../redux/todoListReducer';
 import DeleteWarning from './DeleteWarning/DeleteWarning';
 import './List.scss'
 import Task from './Task/Task';
 import DeleteIMG from '../../assets/images/delete.svg';
 import InfoIMG from '../../assets/images/info.svg';
+import AddIMG from '../../assets/images/add.svg';
 
 
 
-const List = ({ infoAboutList, tasks, renameListTC }) => {
+const List = ({ infoAboutList, tasks, renameListTC, createNewTaskTC, chengeTaskTextTC, chengeComplitedStatusTC, deleteTaskTC }) => {
   const [editTitle, setEditTitle] = useState(false);
   const [title, setTitle] = useState(infoAboutList.title)
   const history = useHistory();
@@ -40,12 +41,24 @@ const List = ({ infoAboutList, tasks, renameListTC }) => {
         }
         <div className="help-buttons">
           <span className='help-buttons__item info'><img src={InfoIMG} alt="" /></span>
-          <span className='help-buttons__item delete'><img onClick={() => history.push(`/delete-warning/${infoAboutList.id}`)} src={DeleteIMG} alt="" /></span> 
+          <span className='help-buttons__item delete'><img onClick={() => history.push(`/delete-warning/${infoAboutList.id}`)} src={DeleteIMG} alt="" /></span>
         </div>
       </div>
-      {tasks.map((item, index) => <Task key={index} {...item} />)}
+      <div className="list__tasks">
+        {tasks.map((item, index) => <Task
+          key={index}
+          chengeTaskTextTC={chengeTaskTextTC}
+          createNewTaskTC={createNewTaskTC}
+          chengeComplitedStatusTC={chengeComplitedStatusTC}
+          deleteTaskTC={deleteTaskTC}
+          {...item}
+        />)}
+      </div>
+      <div className="add-task">
+        <img onClick={() => createNewTaskTC(infoAboutList.id)} src={AddIMG} alt="" title="Add task" />
+      </div>
     </div>
   )
 }
 
-export default connect(null, { renameListTC })(List);
+export default connect(null, { renameListTC, createNewTaskTC, chengeTaskTextTC, chengeComplitedStatusTC, deleteTaskTC })(List);

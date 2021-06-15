@@ -11,7 +11,7 @@ import AddIMG from '../../assets/images/add.svg';
 
 const Main = (props) => {
   const [value, setValue] = useState();
-  const tasks = [{title: "task"},]
+  // const tasks = [{title: "task"},]
   const history = useHistory();
   const changeInput = (e) => {
     setValue(e.target.value)
@@ -27,8 +27,8 @@ const Main = (props) => {
     <div className='main'>
       {/* <input type="text" onChange={changeInput} value={value} />
       <button onClick={submit}>Создать</button> */}
-      {props.lists.map((item, index) => <List key={index} infoAboutList={item} tasks={tasks}/> )}
-      <div className="addList"><NavLink to="/add-list"><img src={AddIMG} alt="" /></NavLink></div>
+      {props.lists.map((item, index) => <List key={index} infoAboutList={item} tasks={item.tasks}/> )}
+      <div className="addList"><NavLink to="/add-list"><img src={AddIMG} alt="" title="Add TODO list"/></NavLink></div>
     </div>
   )
 }
