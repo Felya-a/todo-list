@@ -56,6 +56,7 @@ export const deleteTaskTC = (idList, idTask) => async (dispatch) => {
 }
 
 export const chengeTaskTextTC = (idList, idTask, title) => async (dispatch) => {
+  // при сохранении таски и нулевым текстом она будет удалаться
   if (!title) {
     const resp = await TodoAPI.deleteTask(idList, idTask);
     if (!resp.data.resultCode) dispatch(deleteTask(idList, idTask))

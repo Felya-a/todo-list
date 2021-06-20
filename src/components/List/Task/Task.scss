@@ -1,8 +1,10 @@
 .task {
   width: 100%;
-  height: 40px;
+  // height: 40px;
   display: grid;
   grid-template-columns: minmax(40px, 50px) 1fr;
+  padding: 10px 0;
+  // grid-template-rows: minmax(40px, 100px);
   justify-items: center;
   align-items: center;
   position: relative;
@@ -23,25 +25,40 @@
     img {
       width: 25px;
     }
+    &_loading {
+      cursor: default;
+    }
   }
   &__text {
     user-select: none;
-    width: 100%;
+    width: inherit;
+    // width: 100%;
     height: 100%;
+    justify-self: start;
     display: grid;
     align-items: center;
     justify-items: start;
     .help-buttons {
       width: 40px;
-      &__item.delete img{
+      &__item.delete img {
         left: 0;
       }
     }
     &_input {
+      resize: none;
+      height: 100%;
       font-size: 17px;
       padding: 0 15px;
+      &:focus {
+        & + .help-buttons {
+          transform: translateY(100%);
+        }
+      }
     }
     &_span {
+      &.done{
+        text-decoration: line-through;
+      }
       font-size: 17px;
       padding: 0 15px;
     }

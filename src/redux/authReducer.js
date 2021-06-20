@@ -13,8 +13,8 @@ export const initializeUserTC = () => async (dispatch) => {
   const response = await Initialize.authMe();
   if (!response.data.resultCode) {
     dispatch(initializeUser(response.data.data));
-    return true;
   }
+  return true;
 }
 export const logoutTC = () => async (dispatch) => {
   const response = await Initialize.logout();

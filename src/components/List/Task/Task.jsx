@@ -4,6 +4,7 @@ import cleanCircle from '../../../assets/images/dry-clean.svg';
 import check1IMG from '../../../assets/images/check1.svg';
 import check0IMG from '../../../assets/images/check0.svg';
 import DeleteIMG from '../../../assets/images/delete.svg';
+import * as cn from 'classnames';
 
 
 
@@ -12,6 +13,7 @@ const Task = (props) => {
   const [completed, setCompleted] = useState(false);
   const [taskText, setTaskText] = useState();
   const [loadingTime, setLoadingTime] = useState(false)
+  
   useEffect(() => {
     if (props.title) setTaskText(props.title);
   }, [props.title])
@@ -44,7 +46,7 @@ const Task = (props) => {
     <div className='task'>
       <div className="task__check-block">
         {loadingTime
-          ? <img src={check0IMG} alt="" />
+          ? <img src={check0IMG} className='task__check-block_loading' alt="" />
           : completed
             ? <img onClick={chengeCompleted} src={check1IMG} alt="" />
             : <img onClick={chengeCompleted} src={cleanCircle} alt="" />
@@ -60,8 +62,9 @@ const Task = (props) => {
             onChange={chengeTaskText}
             onBlur={chengeEditMode}
             autoFocus
+            maxLength="100"
           />
-          : <span onClick={() => console.log(loadingTime, completed)} className="task__text_span">{props?.title || "нужно доделать TODO лист"}</span>
+          : <span onClick={() => console.log(loadingTime, completed)} className={cn("task__text_span", {"done": completed})}>{props?.title || "нужно доделать TODO лист"}</span>
         }
         <div className="help-buttons">
           {/* <span className='help-buttons__item info'><img src={InfoIMG} alt="" /></span> */}

@@ -1,10 +1,11 @@
 .list {
-  background-color: rgb(224, 224, 224);
   display: grid;
   grid-template-rows: 50px 1fr;
   position: relative;
+  align-self: start;
   justify-items: center;
   z-index: 2;
+  background-color: rgb(224, 224, 224);
   &:hover{
     .add-task {
       transform: translateY(100%);
@@ -17,7 +18,7 @@
     display: grid;
     justify-items: start;
     align-items: center;
-    outline: 1px solid #80808070;
+    outline: 2px solid #80808070;
     width: 100%;
     height: 50px;
     &:hover {
@@ -92,6 +93,7 @@
   transform: translateY(50%);
   padding: 10px 0;
   img {
+    cursor: pointer;
     width: 25px;
   }
 }
