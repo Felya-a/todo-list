@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/todo-list/static/css/main.18c44c66.chunk.css",
-    "main.js": "/todo-list/static/js/main.eb361e02.chunk.js",
-    "main.js.map": "/todo-list/static/js/main.eb361e02.chunk.js.map",
-    "runtime-main.js": "/todo-list/static/js/runtime-main.6c6ff163.js",
-    "runtime-main.js.map": "/todo-list/static/js/runtime-main.6c6ff163.js.map",
-    "static/js/2.d591cf57.chunk.js": "/todo-list/static/js/2.d591cf57.chunk.js",
-    "static/js/2.d591cf57.chunk.js.map": "/todo-list/static/js/2.d591cf57.chunk.js.map",
-    "static/js/3.416899d7.chunk.js": "/todo-list/static/js/3.416899d7.chunk.js",
-    "static/js/3.416899d7.chunk.js.map": "/todo-list/static/js/3.416899d7.chunk.js.map",
+    "main.css": "/todo-list/static/css/main.8d64575f.chunk.css",
+    "main.js": "/todo-list/static/js/main.0d1815ba.chunk.js",
+    "main.js.map": "/todo-list/static/js/main.0d1815ba.chunk.js.map",
+    "runtime-main.js": "/todo-list/static/js/runtime-main.34ebce7e.js",
+    "runtime-main.js.map": "/todo-list/static/js/runtime-main.34ebce7e.js.map",
+    "static/js/2.1f53b50c.chunk.js": "/todo-list/static/js/2.1f53b50c.chunk.js",
+    "static/js/2.1f53b50c.chunk.js.map": "/todo-list/static/js/2.1f53b50c.chunk.js.map",
+    "static/js/3.ee2f8196.chunk.js": "/todo-list/static/js/3.ee2f8196.chunk.js",
+    "static/js/3.ee2f8196.chunk.js.map": "/todo-list/static/js/3.ee2f8196.chunk.js.map",
     "index.html": "/todo-list/index.html",
-    "static/css/main.18c44c66.chunk.css.map": "/todo-list/static/css/main.18c44c66.chunk.css.map",
-    "static/js/2.d591cf57.chunk.js.LICENSE.txt": "/todo-list/static/js/2.d591cf57.chunk.js.LICENSE.txt",
+    "static/css/main.8d64575f.chunk.css.map": "/todo-list/static/css/main.8d64575f.chunk.css.map",
+    "static/js/2.1f53b50c.chunk.js.LICENSE.txt": "/todo-list/static/js/2.1f53b50c.chunk.js.LICENSE.txt",
     "static/media/add.e353df1d.svg": "/todo-list/static/media/add.e353df1d.svg",
     "static/media/arrow-exit.a244d6b7.svg": "/todo-list/static/media/arrow-exit.a244d6b7.svg",
     "static/media/check0.06efe408.svg": "/todo-list/static/media/check0.06efe408.svg",
@@ -23,9 +23,9 @@
     "static/media/user.8cab7b59.svg": "/todo-list/static/media/user.8cab7b59.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.6c6ff163.js",
-    "static/js/2.d591cf57.chunk.js",
-    "static/css/main.18c44c66.chunk.css",
-    "static/js/main.eb361e02.chunk.js"
+    "static/js/runtime-main.34ebce7e.js",
+    "static/js/2.1f53b50c.chunk.js",
+    "static/css/main.8d64575f.chunk.css",
+    "static/js/main.0d1815ba.chunk.js"
   ]
 }
