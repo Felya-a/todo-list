@@ -4,20 +4,27 @@ import { Input } from '../common/FormsControls/FormsControls';
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux';
 import { logoutTC, loginingTC } from '../../redux/authReducer'
-import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { Modal } from '../../hoc/Modal';
+import { required } from '../../utils/validators/validators';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 
 const LoginForm = (props) => {
+  const [error, setError] = useState(null)
+  useEffect(() => {
+    if (props.error) setError(props.error);
+  }, [props.error])
+  if (error == "Incorrect anti-bot symbols") alert("Пройдите капчу на сайте https://social-network.samuraijs.com/")
   return (
-    <form onSubmit={props.handleSubmit} className='form'>
+    <form onSubmit={props.handleSubmit} className="form">
       <div className="form__input_email input">
         <Field
           type="text"
           placeholder="Email"
           component={Input}
           name='email'
-        // validate={[required]} 
+          validate={[required]}
         />
       </div>
       <div className='form__input_password input'>
@@ -26,7 +33,7 @@ const LoginForm = (props) => {
           placeholder="Password"
           component={Input}
           name='password'
-        // validate={[required]} 
+          validate={[required]}
         />
       </div>
       <div className='form__checkbox_rememberme'>
@@ -39,12 +46,20 @@ const LoginForm = (props) => {
       <label htmlFor="rememberMe" className='form__input_text'>
         Remember me
       </label>
+      <div className="error">
+        {error &&
+          <div className="error__message">
+            <div>{error}</div>
+          </div>
+        }
+      </div>
       <button className='form__btnlogin btn'>Login</button>
     </form>
   )
 }
 
 const LoginReduxFrom = reduxForm({ form: "login" })(LoginForm)
+
 
 const Login = (props) => {
   const logout = () => {
@@ -77,7 +92,5 @@ const mapStateToProps = (state) => ({
 
 export default compose(
   Modal,
-  withRouter,
   connect(mapStateToProps, { loginingTC, logoutTC }),
 )(Login);
-// export default compose(LoginHOC)(Login);

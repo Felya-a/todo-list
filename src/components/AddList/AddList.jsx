@@ -24,7 +24,6 @@ const AddList = (props) => {
     if (promise) props.unmount();
   }
   const keyDownEnter = (e) => {
-    console.log(e);
     if (e.code == "Enter") onSubmit();
   }
 
@@ -33,7 +32,7 @@ const AddList = (props) => {
     <div className='add-list'>
       <h3 className="modal_title">Create List</h3>
       <input autoFocus onKeyPress={keyDownEnter} onChange={chengeValue} value={value} className='add-list_input input' type="text" placeholder="Введите название" />
-      <button onClick={onSubmit} className='add-list_btn btn'>Создать</button>
+      <button onClick={onSubmit} className='add-list_btn btn'>Create</button>
     </div>
   )
 }

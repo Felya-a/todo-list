@@ -1,6 +1,6 @@
 .login {
   display: grid;
-  &__logout-btn{
+  &__logout-btn {
     padding: 15px 30px;
   }
 }
@@ -50,35 +50,35 @@
     margin: 20px 0 15px;
   }
 }
-//   .error {
-//     display: grid;
-//     grid-area: error;
-//     grid-template-areas:
-//       "captcha"
-//       "message";
-//     &__message {
-//       grid-area: message;
-//       outline: solid 1px red;
-//       color: red;
-//       padding: 5px 10px;
-//       margin: 15px 0;
-//     }
-//     &__captcha {
-//       margin: 10px 0 0 0;
-//       display: grid;
-//       grid-area: captcha;
-//       grid-template-areas:
-//         "img"
-//         "input";
-//       &_img {
-//         grid-area: img;
-//         justify-self: center;
-//         display: block;
-//         width: 150px;
-//       }
-//       &_input {
-//         grid-area: input;
-//       }
-//     }
-//   }
-// }
+.error {
+  display: grid;
+  grid-area: error;
+  grid-template-areas:
+    "captcha"
+    "message";
+  &__message {
+    text-align: center;
+    grid-area: message;
+    outline: solid 1px red;
+    color: red;
+    padding: 5px 10px;
+    margin: 15px 0;
+  }
+  &__captcha {
+    margin: 10px 0 0 0;
+    display: grid;
+    grid-area: captcha;
+    grid-template-areas:
+      "img"
+      "input";
+    &_img {
+      grid-area: img;
+      justify-self: center;
+      display: block;
+      width: 150px;
+    }
+    &_input {
+      grid-area: input;
+    }
+  }
+}

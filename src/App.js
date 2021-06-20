@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.scss';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
 import Header from './components/Header/Header';
@@ -19,7 +19,7 @@ function App(props) {
   }, [])
   if (!props.initialized) return <Preloader />;
   return (
-    <BrowserRouter >
+    <HashRouter >
       <div className="App">
         <Header />
         <Route path='/login' render={() => <Login/>} />
@@ -28,7 +28,7 @@ function App(props) {
         <Main />
         <Footer />
       </div>
-    </BrowserRouter >
+    </HashRouter >
   );
 }
 

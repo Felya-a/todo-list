@@ -1,3 +1,4 @@
+import { stopSubmit } from 'redux-form';
 import { Initialize } from './api';
 import { cleanLists, getListsTC } from './todoListReducer';
 
@@ -24,17 +25,14 @@ export const logoutTC = () => async (dispatch) => {
   }
 }
 export const loginingTC = (formData) => async (dispatch) => {
-  // TODO: delete later
-  const _formData = {
-    email: "641027B@gmail.com",
-    password: "qwerty123",
-    rememberMe: true,
-  }
-  const response = await Initialize.logining(_formData);
+  const response = await Initialize.logining(formData);
   if (!response.data.resultCode) {
     dispatch(initializeUserTC());
     dispatch(getListsTC());
     return true;
+  } else {
+		let errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+    dispatch(stopSubmit('login', { _error: errorMessage }))
   };
 }
 

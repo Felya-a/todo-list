@@ -3,8 +3,8 @@
   // height: 40px;
   display: grid;
   grid-template-columns: minmax(40px, 50px) 1fr;
-  padding: 10px 0;
-  // grid-template-rows: minmax(40px, 100px);
+  // padding: 10px 0;
+  grid-template-rows: minmax(42px, auto);
   justify-items: center;
   align-items: center;
   position: relative;
@@ -45,8 +45,10 @@
       }
     }
     &_input {
+      z-index: -1;
       resize: none;
       height: 100%;
+      box-sizing: content-box;
       font-size: 17px;
       padding: 0 15px;
       &:focus {

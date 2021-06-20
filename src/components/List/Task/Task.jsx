@@ -41,7 +41,6 @@ const Task = (props) => {
   const chengeTaskText = (e) => {
     setTaskText(e.target.value);
   }
-  console.log("RENDER TASK");
   return (
     <div className='task'>
       <div className="task__check-block">
@@ -64,10 +63,9 @@ const Task = (props) => {
             autoFocus
             maxLength="100"
           />
-          : <span onClick={() => console.log(loadingTime, completed)} className={cn("task__text_span", {"done": completed})}>{props?.title || "нужно доделать TODO лист"}</span>
+          : <span className={cn("task__text_span", {"done": completed})}>{props.title}</span>
         }
         <div className="help-buttons">
-          {/* <span className='help-buttons__item info'><img src={InfoIMG} alt="" /></span> */}
           <span className='help-buttons__item delete'><img onClick={deleteTask} src={DeleteIMG} alt="" /></span>
         </div>
       </div>

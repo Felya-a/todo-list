@@ -17,7 +17,6 @@ const DeleteWarning = (props) => {
   }
 
   const keyDownEnter = (e) => {
-    console.log(e);
     if (e.code == "Enter") deleteList();
   }
 
