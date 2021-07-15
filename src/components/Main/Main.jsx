@@ -21,14 +21,21 @@ const Main = (props) => {
     props.createNewListTC(value)
   }
 
-  if (!props.isAuth) return null;
-  if (Array.isArray(props.lists) && props.lists.length == 0) return <div className="preloader-wrapper"><Preloader/></div>; 
+  if (!props.isAuth) return (
+    <div className="testApp">
+      <p>Для тестирования приложения:</p>
+      <br />
+      <p>Email: free@samuraijs.com</p>
+      <p>Password: free</p>
+    </div>
+  );
+  if (Array.isArray(props.lists) && props.lists.length == 0) return <div className="preloader-wrapper"><Preloader /></div>;
   return (
     <div className='main'>
       {/* <input type="text" onChange={changeInput} value={value} />
       <button onClick={submit}>Создать</button> */}
-      {props.lists.map((item, index) => <List key={index} infoAboutList={item} tasks={item.tasks}/> )}
-      <div className="addList"><NavLink to="/add-list"><img src={AddIMG} alt="" title="Add TODO list"/></NavLink></div>
+      {props.lists.map((item, index) => <List key={index} infoAboutList={item} tasks={item.tasks} />)}
+      <div className="addList"><NavLink to="/add-list"><img src={AddIMG} alt="" title="Add TODO list" /></NavLink></div>
     </div>
   )
 }

@@ -30,7 +30,7 @@ export const loginingTC = (formData) => async (dispatch) => {
     dispatch(initializeUserTC());
     dispatch(getListsTC());
     return true;
-  } else {
+  } else if (response.data.resultCode == 1){
 		let errorMessage = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
     dispatch(stopSubmit('login', { _error: errorMessage }))
   };

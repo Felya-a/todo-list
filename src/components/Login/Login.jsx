@@ -47,9 +47,9 @@ const LoginForm = (props) => {
         Remember me
       </label>
       <div className="error">
-        {error &&
+        {props.error &&
           <div className="error__message">
-            <div>{error}</div>
+            <div>{props.error}</div>
           </div>
         }
       </div>
@@ -67,11 +67,11 @@ const Login = (props) => {
     props.unmount();
   }
 
-  const onSubmit = async (formData) => {
-    const promise = await props.loginingTC(formData);
-    if (promise) props.unmount();
+  const onSubmit = (formData) => {
+    // const promise = await props.loginingTC(formData);
+    // if (promise) props.unmount();
+    props.loginingTC(formData)
   }
-
   return (
     <div className='login'>
       {props.isAuth
@@ -80,7 +80,7 @@ const Login = (props) => {
       }
       {props.isAuth
         ? <button onClick={logout} className='login__logout-btn btn'>Logout</button>
-        : <LoginReduxFrom onSubmit={onSubmit} />
+        : <LoginReduxFrom onSubmit={onSubmit} initialValues={{ email: 'free@samuraijs.com', password: 'free' }} />
       }
     </div>
   )
