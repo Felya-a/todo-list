@@ -39,11 +39,11 @@ export const TodoAPI = {
   getTasks(idList, count = 100, page = 1) {
     return instance.get(`todo-lists/${idList}/tasks`, { count, page })
   },
-  // Chenge Task
-  chengeTitleTask(idList, idTask, title) {
+  // change Task
+  changeTitleTask(idList, idTask, title) {
     return instance.put(`todo-lists/${idList}/tasks/${idTask}`, { title })
   },
-  chengeComplited(idList, idTask, complited, title) {
+  changeComplited(idList, idTask, complited, title) {
     return instance.put(`todo-lists/${idList}/tasks/${idTask}`, { title, status: Number(complited) })
   },
   deleteTask(idList, idTask) {

@@ -1,79 +1,67 @@
 import { TodoAPI } from "./api"
+import * as uuid from 'uuid'
 
 // Action Type
 const SET_LIST = "SET_LIST"
+const SET_NEW_LIST = "SET_NEW_LIST"
+const RENAME_LIST = "RENAME_LIST"
 const DELETE_LIST = 'DELETE_LIST'
 const CLEAN_LISTS = 'CLEAN_LISTS'
 const SET_TASKS = 'SET_TASKS'
 const SET_NEW_TASK = 'SET_NEW_TASK'
 const DELETE_TASK = 'DELETE_TASK'
-const SET_TASK_AFTER_CHENGE = 'SET_TASK_AFTER_CHENGE'
+const SET_TASK_AFTER_CHANGE = 'SET_TASK_AFTER_CHANGE'
 // Action Creator
 export const setLists = (lists) => ({ type: SET_LIST, lists })
 export const setTasks = (tasks) => ({ type: SET_TASKS, tasks })
-export const deleteList = (idList) => ({ type: DELETE_LIST, idList })
+export const deleteList = (listID) => ({ type: DELETE_LIST, listID })
+export const renameList = (listID, title) => ({ type: RENAME_LIST, listID, title })
 export const cleanLists = () => ({ type: CLEAN_LISTS, })
-export const setNewTask = (task) => ({ type: SET_NEW_TASK, task })
-export const deleteTask = (idList, idTask) => ({ type: DELETE_TASK, idList, idTask })
-export const setTaskAfterChenge = (task) => ({ type: SET_TASK_AFTER_CHENGE, task })
+export const setNewTask = (listID) => ({ type: SET_NEW_TASK, listID })
+export const deleteTask = (listID, taskID) => ({ type: DELETE_TASK, listID, taskID })
+export const setTaskAfterchange = (task) => ({ type: SET_TASK_AFTER_CHANGE, task })
+export const setNewList = (title) => ({ type: SET_NEW_LIST, title })
 // Thunk Creator
+export const saveChangesToLocalStorage = () => (dispatch, state) => {
+  localStorage.setItem('data', JSON.stringify(state().todo.lists))
+}
+
 export const createNewListTC = (title) => async (dispatch) => {
-  const response = await TodoAPI.createList(title)
-  if (!response.data.resultCode) {
-    dispatch(getListsTC())
-    return true
-  }
+  title = !title ? 'Задачи' : title
+  dispatch(setNewList(title))
+  return true
 }
 export const getListsTC = () => async (dispatch) => {
   const data = JSON.parse(localStorage.getItem('data'))
-  console.log(data)
   await dispatch(setLists(data))
-  // const response = await TodoAPI.getLists();
-  // console.log(response.data)
-  // if (response) dispatch(setLists(response.data));
-  // const idsList = response.data.map(item => item.id);
-  // Promise.all([...idsList.map(item => TodoAPI.getTasks(item))]) // в массиве может быть много промисов
-  //   .then((result) => {
-  //     dispatch(setTasks(result))
-  //   })
 }
 export const renameListTC = (id, title) => async (dispatch) => {
-  const response = await TodoAPI.renameList(id, title)
-  if (!response.data.resultCode) dispatch(getListsTC())
+  await dispatch(renameList(id, title))
 }
 export const deleteListTC = (id) => async (dispatch) => {
-  const response = await TodoAPI.deleteList(id)
-  if (!response.data.resultCode) {
-    dispatch(deleteList(id))
-    return true
-  }
+  await dispatch(deleteList(id))
+  return true
 }
 
-export const createNewTaskTC = (idList) => async (dispatch) => {
-  const response = await TodoAPI.setTask(idList, "Ваша задача")
-  if (!response.data.resultCode) dispatch(setNewTask(response.data.data.item))
+export const createNewTaskTC = (listID) => async (dispatch) => {
+  await dispatch(setNewTask(listID))
 }
 
-export const deleteTaskTC = (idList, idTask) => async (dispatch) => {
-  const response = await TodoAPI.deleteTask(idList, idTask)
-  if (!response.data.resultCode) dispatch(deleteTask(idList, idTask))
+export const deleteTaskTC = (listID, taskID) => async (dispatch) => {
+  await dispatch(deleteTask(listID, taskID))
 }
 
-export const chengeTaskTextTC = (idList, idTask, title) => async (dispatch) => {
+export const changeTaskTextTC = (listID, taskID, title, completed) => async (dispatch) => {
   // при сохранении таски и нулевым текстом она будет удалаться
   if (!title) {
-    const resp = await TodoAPI.deleteTask(idList, idTask)
-    if (!resp.data.resultCode) dispatch(deleteTask(idList, idTask))
+    await dispatch(deleteTask(listID, taskID))
   } else {
-    const response = await TodoAPI.chengeTitleTask(idList, idTask, title)
-    if (!response.data.resultCode) dispatch(setTaskAfterChenge(response.data.data.item))
+    await dispatch(setTaskAfterchange({ listID, taskID, title, completed }))
   }
 }
 
-export const chengeComplitedStatusTC = (listID, idTask, completed, title) => async (dispatch, state) => {
-  // const response = await TodoAPI.chengeComplited(idList, idTask, done, taskText);
-  await dispatch(setTaskAfterChenge({ listID, idTask, completed, title }))
-  console.log(state())
+export const changeComplitedStatusTC = (listID, taskID, completed, title) => async (dispatch, state) => {
+  await dispatch(setTaskAfterchange({ listID, taskID, completed, title }))
 }
 
 const initialState = {
@@ -81,13 +69,47 @@ const initialState = {
   listsIds: [],
 }
 
+/*
+'data' - [{
+  id: string
+  title: string
+  tasks: [
+    {
+      id: string
+      listID: string
+      text: string
+      completed: boolean
+    },
+  ]
+},]
+*/
+
 const todoListReducer = (state = initialState, action) => {
+  const listID = uuid.v1()
+  const taskID = uuid.v1()
   switch (action.type) {
     case SET_LIST:
-      // if (action.lists.length == 0) return { ...state, lists: null }; // если у пользователя нет листов
       return {
-        // ...state,
         lists: action.lists
+      }
+    case SET_NEW_LIST:
+      return {
+        ...state,
+        lists: [...state.lists, {
+          id: listID,
+          title: action.title,
+          tasks: [{
+            id: taskID,
+            listID: listID,
+            title: action.title,
+            completed: false
+          }]
+        }]
+      }
+    case RENAME_LIST:
+      return {
+        ...state,
+        lists: state.lists.map(item => item.id == action.listID ? ({ ...item, title: action.title}) : item),
       }
     case CLEAN_LISTS:
       return {
@@ -97,7 +119,7 @@ const todoListReducer = (state = initialState, action) => {
     case DELETE_LIST:
       return {
         ...state,
-        lists: [...state.lists.filter(item => item.id != action.idList)]
+        lists: [...state.lists.filter(item => item.id != action.listID)]
       }
     case SET_TASKS:
       return {
@@ -107,22 +129,30 @@ const todoListReducer = (state = initialState, action) => {
     case SET_NEW_TASK:
       return {
         ...state,
-        lists: [...state.lists.map(item => item.id == action.task.todoListId ? ({ ...item, tasks: [action.task, ...item.tasks] }) : item)],
+        lists: [...state.lists.map(item => item.id == action.listID ? ({
+          ...item, tasks: [...item.tasks,
+          {
+            id: taskID,
+            listID: item.id,
+            title: '',
+            completed: false
+          }
+          ]
+        }) : item)],
       }
     case DELETE_TASK:
       return {
         ...state,
-        lists: [...state.lists.map(item => item.id == action.idList ? ({ ...item, tasks: item.tasks.filter(item => item.id != action.idTask) }) : item)],
+        lists: [...state.lists.map(item => item.id == action.listID ? ({ ...item, tasks: item.tasks.filter(item => item.id != action.taskID) }) : item)],
       }
-    case SET_TASK_AFTER_CHENGE:
-      console.log(action.task.completed)
+    case SET_TASK_AFTER_CHANGE:
       return {
         ...state,
         // мы в промисе получаем целую измененную таску и заменяем ей старую
         lists: [...state.lists.map(item => item.id == action.task.listID ? {
-          ...item, tasks: item.tasks.map(item => item.id == action.task.idTask ?
+          ...item, tasks: item.tasks.map(item => item.id == action.task.taskID ?
             {
-              id: action.task.isTask,
+              id: action.task.taskID,
               listID: action.task.listID,
               completed: action.task.completed,
               title: action.task.title,

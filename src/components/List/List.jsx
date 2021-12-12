@@ -1,40 +1,49 @@
-import { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { NavLink, Redirect, useHistory } from 'react-router-dom';
-import { renameListTC, createNewTaskTC, chengeTaskTextTC, chengeComplitedStatusTC, deleteTaskTC } from '../../redux/todoListReducer';
-import DeleteWarning from './DeleteWarning/DeleteWarning';
+import { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { NavLink, Redirect, useHistory } from 'react-router-dom'
+import { renameListTC, createNewTaskTC, changeTaskTextTC, changeComplitedStatusTC, deleteTaskTC } from '../../redux/todoListReducer'
+import DeleteWarning from './DeleteWarning/DeleteWarning'
 import './List.scss'
-import Task from './Task/Task';
-import DeleteIMG from '../../assets/images/delete.svg';
-import InfoIMG from '../../assets/images/info.svg';
-import AddIMG from '../../assets/images/add.svg';
+import Task from './Task/Task'
+import DeleteIMG from '../../assets/images/delete.svg'
+import InfoIMG from '../../assets/images/info.svg'
+import AddIMG from '../../assets/images/add.svg'
 
 
 
-const List = ({ infoAboutList, tasks, renameListTC, createNewTaskTC, chengeTaskTextTC, chengeComplitedStatusTC, deleteTaskTC }) => {
-  const [editTitle, setEditTitle] = useState(false);
+const List = ({ infoAboutList, tasks, renameListTC, createNewTaskTC, changeTaskTextTC, changeComplitedStatusTC, deleteTaskTC }) => {
+  const [editTitle, setEditTitle] = useState(false)
   const [title, setTitle] = useState(infoAboutList.title)
-  const history = useHistory();
-  const chengeEditMode = () => {
-    if (editTitle && title != infoAboutList.title) renameListTC(infoAboutList.id, title);
+  const history = useHistory()
+
+  useEffect(() => {
+    setTitle(infoAboutList.title)
+  }, [infoAboutList.title])
+
+  const changeEditMode = () => {
+    if (editTitle && title != infoAboutList.title) renameListTC(infoAboutList.id, title)
     setEditTitle(!editTitle)
   }
-  const chengeTitleText = (e) => {
+
+  const changeTitleText = (e) => {
     setTitle(e.target.value)
   }
-  useEffect(() => {
-    setTitle(infoAboutList.title);
-  }, [infoAboutList.title])
+
+  const keyDownEnter = (e) => {
+    if (e.code == "Enter") changeEditMode();
+  }
+
   return (
     <div className='list'>
-      <div className="list__title" onDoubleClick={chengeEditMode}>
+      <div className="list__title" onDoubleClick={changeEditMode}>
         {editTitle
           ? <input
             className="list__title_input input"
             type="text"
             value={title}
-            onChange={chengeTitleText}
-            onBlur={chengeEditMode}
+            onKeyPress={keyDownEnter}
+            onChange={changeTitleText}
+            onBlur={changeEditMode}
             autoFocus
           />
           : <span className="list__title_span">{title}</span>
@@ -47,9 +56,9 @@ const List = ({ infoAboutList, tasks, renameListTC, createNewTaskTC, chengeTaskT
       <div className="list__tasks">
         {tasks.map((item, index) => <Task
           key={index}
-          chengeTaskTextTC={chengeTaskTextTC}
+          changeTaskTextTC={changeTaskTextTC}
           createNewTaskTC={createNewTaskTC}
-          chengeComplitedStatusTC={chengeComplitedStatusTC}
+          changeComplitedStatusTC={changeComplitedStatusTC}
           deleteTaskTC={deleteTaskTC}
           {...item}
         />)}
@@ -61,4 +70,4 @@ const List = ({ infoAboutList, tasks, renameListTC, createNewTaskTC, chengeTaskT
   )
 }
 
-export default connect(null, { renameListTC, createNewTaskTC, chengeTaskTextTC, chengeComplitedStatusTC, deleteTaskTC })(List);
+export default connect(null, { renameListTC, createNewTaskTC, changeTaskTextTC, changeComplitedStatusTC, deleteTaskTC })(List)

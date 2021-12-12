@@ -27,39 +27,45 @@ const Task = (props) => {
     props.deleteTaskTC(props.listID, props.id)
   }
 
-  const chengeCompleted = async () => {
+  const changeCompleted = async () => {
     setLoadingTime(true)
-    props.chengeComplitedStatusTC(props.listID, props.id, !completed, taskText)
+    props.changeComplitedStatusTC(props.listID, props.id, !completed, taskText)
   }
 
-  const chengeEditMode = () => {
+  const changeEditMode = () => {
     // if (editMode && taskText != props.title) props.addTaskTC(props.idList, taskText)
-    if (editMode && taskText != props.title) props.chengeTaskTextTC(props.listID, props.id, taskText)
+    if (editMode && taskText != props.title) props.changeTaskTextTC(props.listID, props.id, taskText, props.completed)
     setEditMode(!editMode);
   }
 
-  const chengeTaskText = (e) => {
+  const changeTaskText = (e) => {
     setTaskText(e.target.value);
   }
+
+  const keyDownEnter = (e) => {
+    if (e.code == "Enter") changeEditMode();
+  }
+
   return (
     <div className='task'>
       <div className="task__check-block">
         {loadingTime
           ? <img src={check0IMG} className='task__check-block_loading' alt="" />
           : completed
-            ? <img onClick={chengeCompleted} src={check1IMG} alt="" />
-            : <img onClick={chengeCompleted} src={cleanCircle} alt="" />
+            ? <img onClick={changeCompleted} src={check1IMG} alt="" />
+            : <img onClick={changeCompleted} src={cleanCircle} alt="" />
         }
       </div>
-      <div onDoubleClick={chengeEditMode} className="task__text">
+      <div onDoubleClick={changeEditMode} className="task__text">
         {editMode
           ? <input
             className='task__text_input input'
             type="text"
-            placeholder="Enter the task..."
+            placeholder="Enter task..."
+            onKeyPress={keyDownEnter}
             value={taskText}
-            onChange={chengeTaskText}
-            onBlur={chengeEditMode}
+            onChange={changeTaskText}
+            onBlur={changeEditMode}
             autoFocus
             maxLength="100"
           />

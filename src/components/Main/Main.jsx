@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import './Main.scss'
 import { createNewListTC } from '../../redux/todoListReducer'
@@ -11,7 +11,6 @@ import AddIMG from '../../assets/images/add.svg';
 
 const Main = (props) => {
   const [value, setValue] = useState();
-  // const tasks = [{title: "task"},]
   const history = useHistory();
   const changeInput = (e) => {
     setValue(e.target.value)
@@ -21,15 +20,6 @@ const Main = (props) => {
     props.createNewListTC(value)
   }
 
-  if (!props.isAuth) return (
-    <div className="testApp">
-      <p>Для тестирования приложения:</p>
-      <br />
-      <p>Email: free@samuraijs.com</p>
-      <p>Password: free</p>
-    </div>
-  );
-  if (Array.isArray(props.lists) && props.lists.length == 0) return <div className="preloader-wrapper"><Preloader /></div>;
   return (
     <div className='main'>
       {/* <input type="text" onChange={changeInput} value={value} />

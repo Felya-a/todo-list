@@ -16,6 +16,7 @@ const LoginForm = (props) => {
     if (props.error) setError(props.error);
   }, [props.error])
   if (error == "Incorrect anti-bot symbols") alert("Пройдите капчу на сайте https://social-network.samuraijs.com/")
+
   return (
     <form onSubmit={props.handleSubmit} className="form">
       <div className="form__input_email input">

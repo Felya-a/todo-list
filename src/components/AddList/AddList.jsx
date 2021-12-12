@@ -14,7 +14,7 @@ const AddList = (props) => {
   const history = useHistory();
 
 
-  const chengeValue = (e) => {
+  const changeValue = (e) => {
     setValue(e.target.value);
   }
 
@@ -31,7 +31,7 @@ const AddList = (props) => {
 
     <div className='add-list'>
       <h3 className="modal_title">Create List</h3>
-      <input autoFocus onKeyPress={keyDownEnter} onChange={chengeValue} value={value} className='add-list_input input' type="text" placeholder="Введите название" />
+      <input autoFocus onKeyPress={keyDownEnter} onChange={changeValue} value={value} className='add-list_input input' type="text" placeholder="Введите название" />
       <button onClick={onSubmit} className='add-list_btn btn'>Create</button>
     </div>
   )
