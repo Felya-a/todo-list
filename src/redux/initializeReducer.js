@@ -1,5 +1,6 @@
 import { initializeUserTC } from "./authReducer";
 import { getListsTC } from "./todoListReducer";
+import * as uuid from 'uuid';
 
 
 // Action Type
@@ -9,6 +10,8 @@ export const setInitialize = () => ({ type: SET_INIT, });
 // Thunk Creator
 export const initializeAppTC = () => async (dispatch) => {
   const promise = await dispatch(initializeUserTC());
+  // localStorage.setItem('data', '[{"id":"fea4a820-5b5e-11ec-b52d-650f3b77cf7b","title":"One","tasks":[{"id":"fe4c00d0-5b5e-11ec-b52d-650f3b77cf7b","listID":"fea4a820-5b5e-11ec-b52d-650f3b77cf7b","text":"ебашить","completed":true}]}]')
+  // window.uuid = uuid
   if (promise) dispatch(getListsTC());
   dispatch(setInitialize());
 }

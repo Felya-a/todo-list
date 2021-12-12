@@ -17,7 +17,7 @@ function App(props) {
   useEffect(() => {
     props.initializeAppTC();
   }, [])
-  if (!props.initialized) return <Preloader />;
+  // if (!props.initialized) return <Preloader />;
   return (
     <HashRouter >
       <div className="App">

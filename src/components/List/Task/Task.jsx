@@ -20,21 +20,21 @@ const Task = (props) => {
 
   useEffect(() => {
     setLoadingTime(false)
-    setCompleted(Boolean(props.status));
-  }, [props.status])
+    setCompleted(Boolean(props.completed));
+  }, [props.completed])
 
   const deleteTask = () => {
-    props.deleteTaskTC(props.todoListId, props.id)
+    props.deleteTaskTC(props.listID, props.id)
   }
 
   const chengeCompleted = async () => {
     setLoadingTime(true)
-    props.chengeComplitedStatusTC(props.todoListId, props.id, !completed, taskText)
+    props.chengeComplitedStatusTC(props.listID, props.id, !completed, taskText)
   }
 
   const chengeEditMode = () => {
     // if (editMode && taskText != props.title) props.addTaskTC(props.idList, taskText)
-    if (editMode && taskText != props.title) props.chengeTaskTextTC(props.todoListId, props.id, taskText)
+    if (editMode && taskText != props.title) props.chengeTaskTextTC(props.listID, props.id, taskText)
     setEditMode(!editMode);
   }
 
