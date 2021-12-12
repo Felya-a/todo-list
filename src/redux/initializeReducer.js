@@ -11,7 +11,7 @@ export const setInitialize = () => ({ type: SET_INIT, })
 export const initializeAppTC = () => async (dispatch) => {
   // const promise = await dispatch(initializeUserTC());
   if (!localStorage.getItem('data')) {
-    localStorage.setItem('data', '[{"id":"fea4a820-5b5e-11ec-b52d-650f3b77cf7b","title":"One","tasks":[{"id":"fe4c00d0-5b5e-11ec-b52d-650f3b77cf7b","listID":"fea4a820-5b5e-11ec-b52d-650f3b77cf7b","title":"ебашить","completed":true}]}]')
+    localStorage.setItem('data', '[{"id":"fea4a820-5b5e-11ec-b52d-650f3b77cf7b","title":"Список задач","tasks":[{"id":"fe4c00d0-5b5e-11ec-b52d-650f3b77cf7b","listID":"fea4a820-5b5e-11ec-b52d-650f3b77cf7b","title":"задача","completed":true}]}]')
   }
   // window.uuid = uuid
   await dispatch(getListsTC())

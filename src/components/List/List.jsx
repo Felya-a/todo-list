@@ -49,7 +49,7 @@ const List = ({ infoAboutList, tasks, renameListTC, createNewTaskTC, changeTaskT
           : <span className="list__title_span">{title}</span>
         }
         <div className="help-buttons">
-          <span className='help-buttons__item info'><img src={InfoIMG} alt="" /></span>
+          <span className='help-buttons__item info'><img onClick={changeEditMode} src={InfoIMG} alt="" /></span>
           <span className='help-buttons__item delete'><img onClick={() => history.push(`/delete-warning/${infoAboutList.id}`)} src={DeleteIMG} alt="" /></span>
         </div>
       </div>

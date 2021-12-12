@@ -56,7 +56,7 @@ const Task = (props) => {
             : <img onClick={changeCompleted} src={cleanCircle} alt="" />
         }
       </div>
-      <div onDoubleClick={changeEditMode} className="task__text">
+      <div onClick={changeEditMode} className="task__text">
         {editMode
           ? <input
             className='task__text_input input'

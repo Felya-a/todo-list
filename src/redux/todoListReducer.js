@@ -101,7 +101,7 @@ const todoListReducer = (state = initialState, action) => {
           tasks: [{
             id: taskID,
             listID: listID,
-            title: action.title,
+            title: '',
             completed: false
           }]
         }]
